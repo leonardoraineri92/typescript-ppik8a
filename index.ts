@@ -35,6 +35,16 @@ const oggettiRandom: Oggetti = [
   'Cuffie',
   'Gomme',
   'zaino',
+  'Pupazzo',
+  'Ombrellone',
+  'Computer',
+  'Valigia',
+  'Tv',
+  'Nokia3310',
+  'radio',
+  'Cuffie',
+  'Gomme',
+  'zaino',
 ];
 //Terreno{
 // casa = {
@@ -57,8 +67,6 @@ const oggettiRandom: Oggetti = [
 // };
 
 const livelli = 3;
-let numeriCasuali = generaNumeriCasuali(3);
-let oggettiStanzaGarage = {};
 
 let terreno: Terreno = {};
 terreno = {
@@ -115,7 +123,7 @@ function generaMatriosca(livelli: number, casaKey: string, casa: {}) {
 
 function generaNumeriCasuali(numeri: number): number[] {
   const min = 1;
-  const numeriCasuali: number[] = [];
+  const numeriCasuali = [];
   while (numeriCasuali.length < numeri - min + 1) {
     const numeroCasuale = Math.floor(Math.random() * (numeri - min + 1)) + min;
     if (!numeriCasuali.includes(numeroCasuale)) {
@@ -125,18 +133,26 @@ function generaNumeriCasuali(numeri: number): number[] {
   return numeriCasuali;
 }
 
+function getNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function oggettiRandomCasaGarage() {
   //togliere da arrayAppoggio i 3 elementi del generaNumeriCasuali
   //ciclo i 3/n numeri casuali
   let oggettiGarage = [...oggettiRandom];
   let oggettiStanza = [];
-  numeriCasuali.forEach((_, index) => {
+  let oggettiStanzaGarage = {
+    objStanza: oggettiStanza,
+    objGarage: oggettiGarage,
+  };
+  generaNumeriCasuali(3).forEach((_, index) => {
     let singleObj = oggettiGarage[index];
     oggettiStanza.push(singleObj);
     oggettiGarage.splice(index, 1);
   });
-  return (oggettiStanzaGarage = {
-    objStanza: oggettiStanza,
-    objGarage: oggettiGarage,
-  });
+  return oggettiStanzaGarage;
 }
+
+console.log(oggettiRandom);
+console.log(generaNumeriCasuali(3));
